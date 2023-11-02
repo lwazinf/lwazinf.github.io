@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Firebase Authentication with Google Sign-In</title>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+    <script>
+        var firebaseConfig = {
+            apiKey: "AIzaSyCcXl6UfTa-6eWqFguK00S9lurmKRCdGuI",
+            authDomain: "teach-me-gpt-ceb7f.firebaseapp.com",
+            projectId: "teach-me-gpt-ceb7f",
+            storageBucket: "teach-me-gpt-ceb7f.appspot.com",
+            messagingSenderId: "1021179563868",
+            appId: "1:1021179563868:web:b53898beb681c3d1707b99"
+        };
+
+        firebase.initializeApp(firebaseConfig);
+
+        document.addEventListener('DOMContentLoaded', function () {
+            var googleSignInButton = document.getElementById("google-sign-in-button");
+
+            googleSignInButton.addEventListener("click", function () {
+                var provider = new firebase.auth.GoogleAuthProvider();
+                firebase.auth().signInWithPopup(provider).then(function (result) {
+                    var user = result.user;
+                    console.log("Google Sign-In successful: ", user);
+                    alert("Welcome, " + user.displayName);
+                }).catch(function (error) {
+                    console.error("Google Sign-In failed: ", error);
+                    alert("Google Sign-In failed. Please try again.");
+                });
+            });
+        });
+    </script>
+</head>
+<body>
+    <h1>Firebase Authentication with Google Sign-In</h1>
+    <p>Click the button below to sign in with your Google account:</p>
+    <button id="google-sign-in-button">Sign in with Google</button>
+</body>
+</html>
